@@ -15,10 +15,15 @@ async function getWeather(city) {
         const response = await fetch(urlHalf1 + city + urlHalf2, {mode: 'cors'});
         const weatherData = await(response.json());
         console.log(weatherData);
+        displayWeather(data(weatherData));
     }
     catch(e) {
         
     }
+}
+
+function displayWeather(weatherData) {
+    test.innerText = weatherData.name;
 }
 
 getWeather('london');
