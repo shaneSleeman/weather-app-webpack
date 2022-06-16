@@ -26,4 +26,4 @@ function displayWeather(weatherData) {
     test.innerText = weatherData.name;
 }
 
-getWeather('london');
+getWeather('san francisco');
