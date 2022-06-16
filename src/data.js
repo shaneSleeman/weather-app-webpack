@@ -2,15 +2,12 @@ const data = (weatherData) => {
     const name = weatherData.name;
     const country = weatherData.sys.country;
     const temp = weatherData.main.temp;
-    const feels = weatherData.main.feels_like;
-    const humidity = weatherData.main.humidity;
     const max = weatherData.main.temp_max;
     const min = weatherData.main.temp_min;
+    const condition = weatherData.weather[0].description;
+    const humidity = weatherData.main.humidity;
     const wind = weatherData.wind.speed;
-    const sunrise = weatherData.sys.sunrise;
-    const sunset = weatherData.sys.sunset;
-    const condition = weatherData.weather.description;
-    return {name};
+    return {name, country, temp, max, min, condition, humidity, wind};
 }
 
 export default data;
