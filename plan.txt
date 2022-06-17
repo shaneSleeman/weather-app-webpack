@@ -1,9 +1,1 @@
-- Mimic nice layout, kinda mobile compatible
-- Lint at the end
 - Do favicon finally
-- Fix invalid text
-
-readme
-- proper
-
-publish properly
