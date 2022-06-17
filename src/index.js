@@ -1,6 +1,9 @@
 import './style.css';
 import data from './data.js';
 
+const body = document.querySelector('body');
+
+
 const urlHalf1 = "http://api.openweathermap.org/data/2.5/weather?q=";
 const urlHalf2 = "&APPID=1392939c8de4d48505175baaadda2965";
 
@@ -14,7 +17,7 @@ async function getWeather(city) {
         displayWeather(data(weatherData));
     }
     catch(e) {
-        displayWeather(null);
+        displayWeather("error");
     }
 }
 
@@ -22,13 +25,23 @@ function displayWeather(weatherData) {
     content.innerHTML = "";
 
     const search = document.createElement('input');
+    search.setAttribute("placeholder", "Sydney");
+    const searchButton = document.createElement('button');
+    searchButton.innerText = "Search";
+    searchButton.addEventListener("click", () => {
+        getWeather(search.value);
+    });
+    search.addEventListener("keypress", (e) => {
+        if(e.keyCode == 13) getWeather(search.value);
+    });
     content.appendChild(search);
-    search.setAttribute("onkeypress", `getWeather(${search.value})`);
+    content.appendChild(searchButton);
 
     const city = document.createElement('h1');
 
-    if(weatherData === null) {
+    if(weatherData === "error") {
         city.innerText = "Invalid location!"
+        content.appendChild(city);
     }
 
     else {
@@ -64,4 +77,4 @@ function displayWeather(weatherData) {
     }
 }
 
-getWeather('san francisco');
+getWeather('london');
