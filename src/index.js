@@ -44,7 +44,8 @@ function displayWeather(weatherData) {
     city.style.fontWeight = "600";
 
     if(weatherData === "error") {
-        city.innerText = "Invalid location!"
+        city.innerText = "Invalid location!";
+        city.style.textAlign = "center";
         content.appendChild(city);
     }
 
@@ -52,7 +53,6 @@ function displayWeather(weatherData) {
         const topbar = document.createElement("div");
 
         city.innerText = `${weatherData.name}, ${weatherData.country}`;
-        //content.appendChild(city);
 
         const condition = document.createElement('div');
         condition.innerText = weatherData.condition;
@@ -79,7 +79,6 @@ function displayWeather(weatherData) {
         temps.appendChild(temp);
         temps.appendChild(minmax);
 
-        //topbar.appendChild(city);
         topbar.appendChild(temps);
         topbar.classList.toggle("topbar");
         content.appendChild(topbar);
@@ -109,14 +108,6 @@ function displayWeather(weatherData) {
         windline.appendChild(windLineText);
         windline.appendChild(windspeed);
         content.appendChild(windline);
-        
-        /*
-        const humidity = document.createElement('div');
-        humidity.innerText = weatherData.humidity;
-        const wind = document.createElement('div');
-        wind.innerText = Math.round((weatherData.wind * 3.6) * 10) / 10;
-        content.appendChild(humidity);
-        content.appendChild(wind);*/
     }
 }
 
