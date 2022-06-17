@@ -3,7 +3,6 @@ import data from './data.js';
 
 const body = document.querySelector('body');
 
-
 const urlHalf1 = "http://api.openweathermap.org/data/2.5/weather?q=";
 const urlHalf2 = "&APPID=1392939c8de4d48505175baaadda2965";
 
@@ -15,9 +14,23 @@ async function getWeather(city) {
         const weatherData = await(response.json());
         console.log(weatherData);
         displayWeather(data(weatherData));
+        //body.style.backgroundImage = ;
+        getBackground(city);
     }
     catch(e) {
         displayWeather("error");
+    }
+}
+
+async function getBackground(city, background) {
+    let query = "https://api.giphy.com/v1/gifs/translate?api_key=feH9t26ujFrmuUNAQoTxDS5O6M8ne897&s=";
+    try {
+        const response = await fetch(query + city, {mode: 'cors'});
+        const responseData = await response.json();
+        background.src = responseData.data.images.original.url;
+    }
+    catch(e) {
+
     }
 }
 
@@ -74,6 +87,10 @@ function displayWeather(weatherData) {
         wind.innerText = weatherData.wind;
         content.appendChild(humidity);
         content.appendChild(wind);
+
+        const background = document.createElement("img");
+        getBackground(weatherData.name, background);
+        content.appendChild(background);
     }
 }
 
