@@ -3,7 +3,7 @@ import data from './data.js';
 
 const body = document.querySelector('body');
 
-const urlHalf1 = "http://api.openweathermap.org/data/2.5/weather?q=";
+const urlHalf1 = "https://api.openweathermap.org/data/2.5/weather?q=";
 const urlHalf2 = "&APPID=1392939c8de4d48505175baaadda2965";
 
 const content = document.querySelector('.content');
