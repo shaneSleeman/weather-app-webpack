@@ -89,9 +89,11 @@ function displayWeather(weatherData) {
         content.appendChild(wind);
 
         const background = document.createElement("img");
-        getBackground(weatherData.name, background);
+        background.style.height = "20vh";
+        background.style.width = "auto";
+        getBackground(weatherData.condition, background);
         content.appendChild(background);
     }
 }
 
-getWeather('london');
+getWeather('sydney');
