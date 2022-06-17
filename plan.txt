@@ -6,9 +6,4 @@
 readme
 - proper
 
-background
-- set a large image based on the city
-
-fahrenheit
-
 publish properly
