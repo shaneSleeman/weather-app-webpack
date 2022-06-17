@@ -1,10 +1,14 @@
 - Mimic nice layout, kinda mobile compatible
 - Lint at the end
+- Do favicon finally
+- Fix invalid text
 
 readme
 - proper
 
 background
 - set a large image based on the city
+
+fahrenheit
 
 publish properly

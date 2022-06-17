@@ -14,29 +14,17 @@ async function getWeather(city) {
         const weatherData = await(response.json());
         console.log(weatherData);
         displayWeather(data(weatherData));
-        //body.style.backgroundImage = ;
-        getBackground(city);
     }
     catch(e) {
         displayWeather("error");
     }
 }
 
-async function getBackground(city, background) {
-    let query = "https://api.giphy.com/v1/gifs/translate?api_key=feH9t26ujFrmuUNAQoTxDS5O6M8ne897&s=";
-    try {
-        const response = await fetch(query + city, {mode: 'cors'});
-        const responseData = await response.json();
-        background.src = responseData.data.images.original.url;
-    }
-    catch(e) {
-
-    }
-}
-
 function displayWeather(weatherData) {
     content.innerHTML = "";
 
+    const searchbar = document.createElement("div");
+    searchbar.classList.toggle("searchbar");
     const search = document.createElement('input');
     search.setAttribute("placeholder", "Sydney");
     const searchButton = document.createElement('button');
@@ -47,10 +35,13 @@ function displayWeather(weatherData) {
     search.addEventListener("keypress", (e) => {
         if(e.keyCode == 13) getWeather(search.value);
     });
-    content.appendChild(search);
-    content.appendChild(searchButton);
+    searchbar.appendChild(search);
+    searchbar.appendChild(searchButton);
+    content.appendChild(searchbar);
 
-    const city = document.createElement('h1');
+    const city = document.createElement('div');
+    city.style.fontSize = "1.5rem";
+    city.style.fontWeight = "600";
 
     if(weatherData === "error") {
         city.innerText = "Invalid location!"
@@ -58,41 +49,74 @@ function displayWeather(weatherData) {
     }
 
     else {
+        const topbar = document.createElement("div");
+
         city.innerText = `${weatherData.name}, ${weatherData.country}`;
-        content.appendChild(city);
+        //content.appendChild(city);
 
         const condition = document.createElement('div');
         condition.innerText = weatherData.condition;
-        content.appendChild(condition);
+        condition.style.textTransform = "capitalize";
+        const citytext = document.createElement("div");
+        citytext.classList.add("citytext");
+        citytext.appendChild(city);
+        citytext.appendChild(condition);
+        topbar.appendChild(citytext);
 
         const temps = document.createElement('div');
         temps.classList.add('temps');
         const temp = document.createElement('div');
-        temp.innerText = weatherData.temp;
+        temp.classList.toggle("temp");
+        temp.innerText = `${Math.round(weatherData.temp - 273)}°C`;
         const minmax = document.createElement('div')
         minmax.classList.add('minmax');
         const max = document.createElement('div');
-        max.innerText = `Max: ${weatherData.max}`;
+        max.innerText = `Max: ${Math.round(weatherData.max - 273)}°C`;
         const min = document.createElement('div');
-        min.innerText = `Min: ${weatherData.min}`;
+        min.innerText = `Min: ${Math.round(weatherData.min - 273)}°C`;
         minmax.appendChild(max);
         minmax.appendChild(min);
         temps.appendChild(temp);
         temps.appendChild(minmax);
-        content.appendChild(temps);
 
+        //topbar.appendChild(city);
+        topbar.appendChild(temps);
+        topbar.classList.toggle("topbar");
+        content.appendChild(topbar);
+
+        const humidityline = document.createElement("div");
+        humidityline.classList.add("humidityline");
+        const humidityLineText = document.createElement("div");
+        humidityLineText.innerText = "Humidity:";
+        humidityLineText.style.fontSize = "1.5rem";
+        humidityLineText.style.fontWeight = "600";
+        const humidity = document.createElement('div');
+        humidity.innerText = `${weatherData.humidity}%`;
+        humidity.style.fontSize = "1.5rem";
+        humidityline.appendChild(humidityLineText);
+        humidityline.appendChild(humidity);
+        content.appendChild(humidityline);
+
+        const windline = document.createElement("div");
+        windline.classList.add("humidityline");
+        const windLineText = document.createElement("div");
+        windLineText.innerText = "Wind Speed:";
+        windLineText.style.fontSize = "1.5rem";
+        windLineText.style.fontWeight = "600";
+        const windspeed = document.createElement('div');
+        windspeed.innerText = `${Math.round((weatherData.wind * 3.6) * 10) / 10}kph`;
+        windspeed.style.fontSize = "1.5rem";
+        windline.appendChild(windLineText);
+        windline.appendChild(windspeed);
+        content.appendChild(windline);
+        
+        /*
         const humidity = document.createElement('div');
         humidity.innerText = weatherData.humidity;
         const wind = document.createElement('div');
-        wind.innerText = weatherData.wind;
+        wind.innerText = Math.round((weatherData.wind * 3.6) * 10) / 10;
         content.appendChild(humidity);
-        content.appendChild(wind);
-
-        const background = document.createElement("img");
-        background.style.height = "20vh";
-        background.style.width = "auto";
-        getBackground(weatherData.condition, background);
-        content.appendChild(background);
+        content.appendChild(wind);*/
     }
 }
 
