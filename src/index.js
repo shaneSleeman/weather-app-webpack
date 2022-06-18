@@ -12,6 +12,7 @@ async function getWeather(city) {
     try {
         const response = await fetch(urlHalf1 + city + urlHalf2, {mode: 'cors'});
         const weatherData = await(response.json());
+        body.style.background = `url("https://source.unsplash.com/2560x1440/?${city}")`;
         displayWeather(data(weatherData));
     }
     catch(e) {

@@ -12,6 +12,8 @@ body {
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: 2fr 3fr 2fr;
     grid-template-areas: ". . ." ". content ." ". . .";
+
+    background-image: url("https://source.unsplash.com/2560x1440/?sydney");
 }
 
 .searchbar {
@@ -22,9 +24,9 @@ body {
 
 .content {
     grid-area: content;
-    background-color: aliceblue;
+    background-color: rgba(255, 255, 255, 75%);
     border-radius: 30px;
-    box-shadow: 5px 5px 20px lightblue;
+    box-shadow: 5px 5px 40px white;
 
     display: flex;
     flex-direction: column;
@@ -49,12 +51,14 @@ body {
 
 input {
     background-color: aliceblue;
+    border-style: none;
     border-radius: 10px;
     font-size: 1.5rem;
 }
 
 button {
-    background-color: lightblue;
+    border-style: none;
+    background-color: white;
     border-radius: 10px;
     font-size: 1.5rem;
 }
